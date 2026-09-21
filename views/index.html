@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botza Demo Preview Generator</title>
+<link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Botza Demo Preview
+    </a>
+    <nav class="topbar-nav" aria-label="Primary">
+      <a class="nav-link active" href="/" aria-current="page">Generator</a>
+      <a class="nav-link" href="/admin">Admin</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <p class="eyebrow">Sales Tool</p>
+      <h1>Demo Preview Link Generator</h1>
+      <p class="subtitle">Paste a client's website URL and get a shareable link that shows their live site with the Botza widget overlaid, as if it were already installed.</p>
+
+      <form id="generate-form">
+        <div class="field">
+          <label for="url">Target website URL</label>
+          <input type="url" id="url" name="url" placeholder="https://example-college.edu" required>
+        </div>
+
+        <div class="field">
+          <label for="widgetScriptUrl">Botza Widget Script URL <span class="label-hint">(optional)</span></label>
+          <input type="text" id="widgetScriptUrl" name="widgetScriptUrl" placeholder="Leave blank to use the default">
+        </div>
+
+        <div class="field">
+          <label for="chatbotId">Chatbot ID <span class="label-hint">(optional)</span></label>
+          <input type="text" id="chatbotId" name="chatbotId" placeholder="Leave blank to use the default">
+        </div>
+
+        <button type="submit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Generate Preview
+        </button>
+      </form>
+
+      <div id="result" class="result" hidden>
+        <p>Shareable link ready</p>
+        <div class="link-row">
+          <input type="text" id="preview-link" readonly>
+          <button id="copy-btn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copy-label">Copy</span>
+          </button>
+        </div>
+        <p id="mode-note" class="mode-note"></p>
+      </div>
+
+      <div id="error" class="error" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="error-text"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="/public/app.js"></script>
+</body>
+</html>

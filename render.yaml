@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: demo-preview-tool
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: BOTZA_WIDGET_SCRIPT_URL
+        sync: false
+      - key: DEMO_CHATBOT_ID
+        sync: false
+      - key: PORT
+        value: 3000
