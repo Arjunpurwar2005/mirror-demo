@@ -2,7 +2,12 @@ const express = require('express');
 const path = require('path');
 
 const Preview = require('../models/Preview');
-const { fetchHtml, injectBaseTag, buildWidgetOverlaySnippet } = require('../utils/siteInspector');
+const {
+  fetchHtml,
+  injectBaseTag,
+  buildWidgetOverlaySnippet,
+  buildNavigationBlockerSnippet,
+} = require('../utils/siteInspector');
 
 const router = express.Router();
 
@@ -45,7 +50,8 @@ router.get('/:slug', async (req, res) => {
   try {
     const rawHtml = await fetchHtml(preview.targetUrl);
     const withBase = injectBaseTag(rawHtml, preview.targetUrl);
-    const withWidget = withBase.replace(/<\/body>/i, `${widgetSnippet(preview)}</body>`);
+    const injection = `${widgetSnippet(preview)}${buildNavigationBlockerSnippet()}`;
+    const withWidget = withBase.replace(/<\/body>/i, `${injection}</body>`);
     res.send(withWidget);
   } catch {
     res.status(502).send('Could not load the target site for this preview right now. Please try again shortly.');

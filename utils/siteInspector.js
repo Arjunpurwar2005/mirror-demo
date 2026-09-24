@@ -84,10 +84,36 @@ function buildWidgetOverlaySnippet({ widgetScriptUrl, chatbotId }) {
 `;
 }
 
+/**
+ * Blocks navigation away from the mirrored page: link clicks and form
+ * submits are intercepted so the demo stays on this page (and keeps the
+ * Botza widget visible) instead of leaving to another page on the target site.
+ */
+function buildNavigationBlockerSnippet() {
+  return `
+<script>
+(function () {
+  document.addEventListener('click', function (event) {
+    var link = event.target && event.target.closest && event.target.closest('a');
+    if (link) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, true);
+  document.addEventListener('submit', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }, true);
+})();
+</script>
+`;
+}
+
 module.exports = {
   isValidHttpUrl,
   checkIframeBlocked,
   fetchHtml,
   injectBaseTag,
   buildWidgetOverlaySnippet,
+  buildNavigationBlockerSnippet,
 };
